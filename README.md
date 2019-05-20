@@ -32,6 +32,7 @@
 2）server首先向controller请求任务和调度结果；
 
 3）一个task由多条flow组成。 server根据每条流的五元组（server_ip. server_port, protocol number, client_ip, client_ip）， 按照调度结果（流起始时间）与clients分别建立连接（一个连接对应一个子线程）；在每条连接内，server发送的数据量 = flow size， 持续时间 = duration_time；
+
 4）返回性能指标：在deadline时间内，有多少任务完成了（或者有效吞吐），待实现。
 
 //=============================================================================
@@ -42,15 +43,22 @@
 
 二. How To Run:
 
-1）三台服务器，分别对应controller, server_0, server_1;
+1）三台服务器，分别对应controller,  server_0,  server_1;
 
 2）编译， 进入路径 ~/TAPS/src_test, 在三台服务器上分别运行：
+
 	sh compile_controller.sh  
+
 	sh compile_server_0.sh
+
 	sh compile_server_1.sh 
 
 3）执行，依次运行controller, server_0, server_1：
+
 	./test_controller 
+
 	./test_server_0  
+
 	./test_server_1 
-//==============================================================================================
+
+//=============================================================================
