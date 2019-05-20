@@ -117,9 +117,9 @@ void responsor_subflow(int sock) {
 	char recv_data[100] = {'\0'};
 
 	for(int i = 0; i < 10; i++) {
-	Recv_tcp(sock, recv_data, 100);
-	printf( "the %d-th data recved is %s\n", i, recv_data);
-	Send_tcp(sock, recv_data, 100);	
+		Recv_tcp(sock, recv_data, 100);
+		printf( "the %d-th data recved is %s\n", i, recv_data);
+		Send_tcp(sock, recv_data, 100);	
 	}
 
 	close(sock);
@@ -141,10 +141,10 @@ void sponsor_subflow(char *_ip_self, char *_port_connect_self,
 											  _ip_dst,  _port_connect_dst);
 //	for(int i = 0; ; i++) {
 	for(int i = 0; i < 10; i++) {
-	Send_tcp(client_socket.sock_id, sent_data, 100);
-	printf( "the %d-th packet sent is %s\n", i, sent_data);
-	Recv_tcp(client_socket.sock_id, sent_data_a, 100);
-	printf( "the %d-th packet sent of recv is %s\n", i, sent_data_a);
+		Send_tcp(client_socket.sock_id, sent_data, 100);
+		printf( "the %d-th packet sent is %s\n", i, sent_data);
+		Recv_tcp(client_socket.sock_id, sent_data_a, 100);
+		printf( "the %d-th packet sent of recv is %s\n", i, sent_data_a);
 	}
 
 	close(client_socket.sock_id);
