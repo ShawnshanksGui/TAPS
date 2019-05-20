@@ -28,14 +28,12 @@ server（暂时由于两台servers， 0，1组成）:
 
 二. How To Run:
 1）三台服务器，分别对应controller, server_0, server_1;
-\n
-\n
+
 2）编译， 进入路径 ~/TAPS/src_test, 在三台服务器上分别运行：
 	sh compile_controller.sh  
 	sh compile_server_0.sh
 	sh compile_server_1.sh 
-\n
-\n
+
 3）执行，依次运行controller, server_0, server_1：
 	./test_controller 
 	./test_server_0  
