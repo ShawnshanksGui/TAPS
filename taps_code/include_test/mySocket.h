@@ -56,6 +56,7 @@ public:
 
 	void transmitter_new_udp(char *addr_self, char *port_self, 
 		                 char *addr_dst,  char *port_dst); 
+                                      
 //	void transmitter_new_tcp(char *add_self, char *port_self);
 	void transmitter_new_tcp_responsor(char *addr_self, char *port_self);
 	void transmitter_new_tcp_sponsor(char *addr_self, char *port_self,
@@ -63,11 +64,14 @@ public:
 
 	void transmitter_new_tcp_non_b(char *addr_self, char *port_self);
 	
-//	int Send_udp(char *data_src, int len);
-//	int Recv_udp(char *buf_dst, int len);
+
 };
 
+//********UDP********
+int Send_udp(int sock, char *data_src, int len);
+int Recv_udp(int sock, char *buf_dst, int len);
 
+//********TCP********
 int Send_tcp(int sock_connect, char *data_src, int len);
 //	int Send_tcp_non_b(char *data, int len);
 int Recv_tcp(int sock_connect, char *data_dst, int len);
