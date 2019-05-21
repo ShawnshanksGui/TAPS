@@ -64,12 +64,12 @@ public:
 
 	void transmitter_new_tcp_non_b(char *addr_self, char *port_self);
 	
-
+ //********UDP********
+  int Send_udp(char *data_src, int len);
+  int Recv_udp(char *buf_dst, int len); 
 };
 
-//********UDP********
-int Send_udp(int sock, char *data_src, int len);
-int Recv_udp(int sock, char *buf_dst, int len);
+
 
 //********TCP********
 int Send_tcp(int sock_connect, char *data_src, int len);

@@ -2,6 +2,8 @@
 #include "../include_test/common.h"
 #include "../include_test/task.h"
 
+#include "../include_test/flow_schedule.h"
+
 #include <chrono>
 #include <string>
 #include <vector>
@@ -89,7 +91,7 @@ int main() {
 }
 
 void responsor() {
-	printf("the thread of responsor/listen id isï¼š %ld\n", syscall(SYS_gettid));
+	printf("the thread of responsor/listen id isï¼?%ld\n", syscall(SYS_gettid));
 
 	int sock_connect;
 
@@ -112,7 +114,7 @@ void responsor() {
 
 //responsor data flow
 void responsor_subflow(int sock) {
-	printf("the responsor_subflow thread id isï¼š %ld\n", syscall(SYS_gettid));
+	printf("the responsor_subflow thread id isï¼?%ld\n", syscall(SYS_gettid));
 
 	char recv_data[100] = {'\0'};
 
@@ -130,7 +132,7 @@ void responsor_subflow(int sock) {
 void sponsor_subflow(char *_ip_self, char *_port_connect_self, 
 					 char *_ip_dst,  char *_port_connect_dst) {
 	
-	printf("the sponsor_subflow thread id isï¼š %ld, the port_self is %d\n", 
+	printf("the sponsor_subflow thread id isï¼?%ld, the port_self is %d\n", 
 			syscall(SYS_gettid), ntohs(htons(atoi(_port_connect_self) )));
 	
 	char sent_data[100] = {'a', 'b','\0'};
@@ -239,7 +241,7 @@ int main() {
 //sponsor data flow
 void sp_flow(char *_port_self, char *_ip_dst, char *_port_dst) {
 	
-	printf("the thread id isï¼š %d, the port_self is %d\n", syscall(SYS_gettid), htons(atoi(_port_self)));
+	printf("the thread id isï¼?%d, the port_self is %d\n", syscall(SYS_gettid), htons(atoi(_port_self)));
 	
 	char sent_data[100] = {'a', 'b','\0'};
 	char sent_data_a[100] = {'\0'};

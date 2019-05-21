@@ -150,7 +150,7 @@ Connect() {
 	if(connect(sock_id, (SA *)&server_addr, sizeof(server_addr)) < 0) {
     	if(errno != EINPROGRESS) { 
 	  		perror("Connect socket failed: ");
-	  		printf("thread id isé”›?%ld, the port_dst is %d\n", 
+	  		printf("thread id isé”?%ld, the port_dst is %d\n", 
 	  				syscall(SYS_gettid), server_addr.sin_port);	
         	exit(0);
 		}
@@ -254,6 +254,34 @@ transmitter_new_tcp_sponsor(char *addr_self, char *port_self,
 }
 
 
+//=======================================================================
+//********UDP*********
+int Transmitter::
+Send_udp(char *data_src, int len) {
+	int num_sent = 0;
+
+	if((num_sent = sendto(sock_id, data_src, len, 0, 
+		(SA *)&(client_addr), sizeof(SA))) < 0) {
+		printf("\n!!!send failed, send %d bytes!!!!!!\n", num_sent);
+		exit(0);
+	}
+	return num_sent;
+}
+
+int Transmitter::
+Recv_udp(char *data_dst, int len) {
+	int num_recv = 0;
+	socklen_t len_server_addr;
+
+	if ((num_recv = recvfrom(sock_id, data_dst, len, 0, 
+	   (SA *)&(client_addr), &len_server_addr)) < 0) {
+		printf("\n!!!recv failed, just recv %d bytes!!!!!!\n", num_recv);
+		exit(0);
+	}
+	return num_recv;
+}
+
+
 /*
 
 void Transmitter::
@@ -287,30 +315,7 @@ transmitter_new_tcp_non_b(char *addr_self, char *port_self) {
 }
 */
 
-//=======================================================================
-//********UDP*********
-int Send_udp(int sock, char *data_src, int len) {
-	int num_sent = 0;
 
-	if((num_sent = sendto(sock, data_src, len, 0, 
-		(SA *)&(client_addr), sizeof(SA))) < 0) {
-		printf("\n!!!send failed, send %d bytes!!!!!!\n", num_sent);
-		exit(0);
-	}
-	return num_sent;
-}
-
-int Recv_udp(int sock, char *data_dst, int len) {
-	int num_recv = 0;
-	socklen_t len_server_addr;
-
-	if ((num_recv = recvfrom(sock, data_dst, len, 0, 
-	   (SA *)&(client_addr), &len_server_addr)) < 0) {
-		printf("\n!!!recv failed, just recv %d bytes!!!!!!\n", num_recv);
-		exit(0);
-	}
-	return num_recv;
-}
 
 //********TCP*********
 int Send_tcp(int sock_connect, char *data, int len) {

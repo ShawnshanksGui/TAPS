@@ -6,14 +6,14 @@ struct Flow_elem{
 	int src;
 	int dst;
 	int flow_id;
-	int flow_size;
+	double flow_size;
 //	int ex_tran_time;    //expected trans time
-	int ddl;      //deadline
+	double ddl;      //deadline
 };
 
 struct Task_elem{
 	int task_id;
-	int src_id;   //the server which generate task and send data 
+	int src;   //the server which generate task and send data 
 	int flow_num; //
 	vector<Flow_elem> flows;
 };
@@ -23,8 +23,8 @@ struct Sched_task_elem{
 	int task_id;
 	int src_id;  //the server which generate task and send data 
 	int flow_num;
-	vector<int> start_time;
-	vector<int> duration_len;
+	vector<double> start_time;
+	vector<double> duration_len;
 };
 
 

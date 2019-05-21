@@ -18,6 +18,6 @@
 #include     <utility>
 
 #define YES 1
-#define No 0
+#define NO 0
 
 #endif

@@ -1,6 +1,8 @@
 #include "../include_test/mySocket.h"
 #include "../include_test/common.h"
-#include "../include_test/task.h"
+//#include "../include_test/task.h"
+
+#include "../include_test/flow_schedule.h"
 
 #include <chrono>
 #include <string>
@@ -31,8 +33,6 @@ char port_connect_self[] = "10000"; //
 char port_connect_dst[] = "6000"; //G8's listening port
 
 
-vector<struct Task_elem> generate_task();
-
 void responsor_for_controller(); //for listening request flow
 void reply_schedule(int socket, vector<struct Sched_task_elem> _schedule_result);
 void encaps_info_pkt(char *info_pkt, int original_task, int cnt_active_task, 
@@ -40,7 +40,7 @@ void encaps_info_pkt(char *info_pkt, int original_task, int cnt_active_task,
 void encaps_schedule_pkt(char *sched_pkt, struct Sched_task_elem &schedule_task);
 
 //global variables which is visible for every thread
-vector<struct Task_elem> task;
+vector<struct Task_elem> tasks;
 vector<struct Sched_task_elem> schedule_result;
 
 
@@ -49,10 +49,13 @@ int main() {
 //divide the whole controller's program into 3 parts 
 //==================================================================
 //(1)  At the start, generate task
-//	task = generate_task();
-//	schedule_result = schedule_task(task);
+	tasks = generate_task();
+	schedule_result = task_schedule(tasks);
 //==================================================================
-
+  cout << "************************" << endl;
+  cout << "generate task, and get flow schedule result!" << endl;
+  cout << "************************" << endl;
+  
 //fisrtly test 1 time slice	
 	for(int i = 0; i < 1; i++) {
 //Responsor_for_controller thread: 
@@ -74,13 +77,8 @@ int main() {
 	return 0;
 }
 
-vector<struct Task_elem> generate_task(){
-//...................................................................
-}
-
-
 void responsor_for_controller() {
-	printf("the thread of responsor/listen id is： %ld\n", syscall(SYS_gettid));
+	printf("the thread of responsor/listen id is %ld\n", syscall(SYS_gettid));
 
 	int sock_connect;
 //	int server_id
