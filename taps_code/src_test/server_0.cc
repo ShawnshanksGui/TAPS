@@ -1,6 +1,6 @@
 #include "../include_test/mySocket.h"
 #include "../include_test/common.h"
-#include "../include_test/task.h"
+//#include "../include_test/task.h"
 
 #include "../include_test/flow_schedule.h"
 
@@ -95,7 +95,7 @@ int main() {
 }
 
 void responsor() {
-	printf("the thread of responsor/listen id isï¼?%ld\n", syscall(SYS_gettid));
+	printf("the thread of responsor/listen id is %ld\n", syscall(SYS_gettid));
 
 	int sock_connect;
 
